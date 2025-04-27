@@ -8,12 +8,11 @@
 - Docker Version: 28.0.4
 - Docker Compose Version: 2.34.0
 
-## 3. 실습 과정
+3. 실습 과정
 
-### 3.1. 취약한 환경 구성
+3.1. 취약한 환경 구성
 먼저 vulhub 레포지터리를 클론하고, Struts2 s2-045 취약 버전이 설정된 디렉터리로 이동했다. 이후 docker-compose를 이용해 컨테이너를 띄웠다.
 
-```bash
 git clone https://github.com/vulhub/vulhub.git
 cd vulhub/struts2/s2-045
 docker compose up -d
