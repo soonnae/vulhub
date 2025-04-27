@@ -3,7 +3,7 @@ CVE-2017-5638 (Apache Struts2 RCE) 실습 보고서
 1. 개요
 Apache Struts2의 Content-Type 필드 처리 취약점을 악용하여 원격 코드 실행(RCE)을 수행하는 취약점을 도커 환경에서 재현하였다.
 
-2. 실습 환경
+3. 실습 환경
 - Host OS: Windows 11
 - Docker Version: 28.0.4
 - Docker Compose Version: 2.34.0
